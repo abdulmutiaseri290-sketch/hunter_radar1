@@ -52,17 +52,13 @@ export default function App() {
       {activeTab === 'radar' && (
         <div style={{ textAlign: 'center', padding: '20px' }}>
           <h2 style={{ color: '#FFD700', marginBottom: '20px' }}>نظام التتبع النشط 📡</h2>
-          
           <div style={{ width: '250px', height: '250px', border: '3px solid #004400', borderRadius: '50%', margin: '30px auto', position: 'relative', background: 'radial-gradient(circle, #001a00, #000)', overflow: 'hidden', boxShadow: '0 0 25px #004400' }}>
             <div style={{ position: 'absolute', top: '50%', left: '50%', width: '100%', height: '100%', background: 'linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.3) 100%)', transformOrigin: 'top left', animation: 'scan 4s linear infinite' }}></div>
             <div style={{ position: 'absolute', width: '12px', height: '12px', backgroundColor: '#FFD700', borderRadius: '50%', top: '35%', left: '65%', boxShadow: '0 0 20px #FFD700', animation: 'pulse 1.5s infinite' }}></div>
           </div>
-          
           <p style={{ color: '#0f0', fontWeight: 'bold', fontSize: '1.2rem' }}>متصل بالأقمار الصناعية 📡</p>
-          <p style={{ color: '#888', marginBottom: '30px' }}>الموقع الحالي: صحراء المملكة</p>
-          
           <button 
-            onClick={() => alert('🚨 تم إرسال نداء الفزعة وموقعك لجميع الصقارين!')}
+            onClick={() => alert('🚨 تم إرسال نداء الفزعة لجميع الصقارين!')}
             style={{ background: '#ff0000', color: '#fff', padding: '20px', borderRadius: '20px', border: 'none', width: '90%', fontWeight: 'bold', fontSize: '1.8rem', cursor: 'pointer', boxShadow: '0 0 25px rgba(255,0,0,0.6)', animation: 'blink 1s infinite' }}
           >🚨 فزعة!</button>
         </div>
@@ -84,19 +80,19 @@ export default function App() {
               type="text" 
               value={newMsg}
               onChange={(e) => setNewMsg(e.target.value)}
-              placeholder="اكتب رسالتك هنا..." 
+              placeholder="اكتب رسالتك..." 
               style={{ flex: 1, padding: '15px', borderRadius: '12px', border: '1px solid #FFD700', background: '#000', color: '#fff', outline: 'none' }}
             />
-            <button onClick={sendMessage} style={{ background: '#FFD700', color: '#000', padding: '0 25px', borderRadius: '12px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>إرسال</button>
+            <button onClick={sendMessage} style={{ background: '#FFD700', color: '#000', padding: '0 25px', borderRadius: '12px', border: 'none', fontWeight: 'bold' }}>إرسال</button>
           </div>
         </div>
       )}
 
-      {/* القائمة السفلية */}
+      {/* المنيو السفلي */}
       <nav style={{ position: 'fixed', bottom: 0, width: '100%', background: '#111', display: 'flex', justifyContent: 'space-around', padding: '20px 0', borderTop: '2px solid #FFD700', zIndex: 1000 }}>
-        <div onClick={() => setActiveTab('radar')} style={{ color: activeTab === 'radar' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem' }}>📡 الرادار</div>
-        <div onClick={() => setActiveTab('chat')} style={{ color: activeTab === 'chat' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem' }}>💬 الدردشة</div>
-        <div onClick={() => window.location.reload()} style={{ color: '#888', cursor: 'pointer', fontSize: '1.1rem' }}>🔒 خروج</div>
+        <div onClick={() => setActiveTab('radar')} style={{ color: activeTab === 'radar' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold' }}>📡 الرادار</div>
+        <div onClick={() => setActiveTab('chat')} style={{ color: activeTab === 'chat' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold' }}>💬 الدردشة</div>
+        <div onClick={() => window.location.reload()} style={{ color: '#888', cursor: 'pointer' }}>🔒 خروج</div>
       </nav>
 
       <style>{`
