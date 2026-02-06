@@ -6,7 +6,7 @@ export default function App() {
   const [pin, setPin] = useState('');
   const [activeTab, setActiveTab] = useState('radar');
   const [messages, setMessages] = useState([
-    { user: 'مدير عبدالمعطي', text: 'الرادار والدردشة شغالين يا شباب! 🦅' },
+    { user: 'مدير عبدالمعطي', text: 'النظام شغال بالكامل يا شباب! 🦅' },
     { user: 'الرادار', text: 'جاري مسح المنطقة المحيطة...' }
   ]);
   const [newMsg, setNewMsg] = useState('');
