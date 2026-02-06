@@ -24,7 +24,7 @@ export default function App() {
       margin: 0 
     }}>
       {!isLoggedIn ? (
-        /* شاشة الدخول - مقتبسة من تصميمك الـ HTML */
+        /* شاشة الدخول */
         <div style={{ 
           textAlign: 'center', 
           border: '1px solid #FFD700', 
@@ -33,7 +33,7 @@ export default function App() {
           background: '#111', 
           width: '320px' 
         }}>
-          <h1 style={{ color: '#FFD700' }}>رادار 1</h1>
+          <h1 style={{ color: '#FFD700' }}>🦅 رادار 1</h1>
           <input 
             type="password" 
             placeholder="الرمز السري"
@@ -69,7 +69,7 @@ export default function App() {
           </button>
         </div>
       ) : (
-        /* شاشة الرادار - مقتبسة من تصميمك الـ HTML */
+        /* شاشة الرادار */
         <div style={{ 
           textAlign: 'center', 
           border: '1px solid #FFD700', 
@@ -100,7 +100,7 @@ export default function App() {
               animation: 'scan 4s linear infinite' 
             }}></div>
           </div>
-          <p>متصل بالأقمار الصناعية</p>
+          <p style={{ color: '#00ff00' }}>متصل بالأقمار الصناعية 📡</p>
           <button 
             onClick={() => setIsLoggedIn(false)}
             style={{ 
@@ -118,13 +118,12 @@ export default function App() {
         </div>
       )}
 
-      {/* إضافة الأنيميشن الخاص بالرادار */}
       <style>{`
         @keyframes scan {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
-      `}`}</style>
+      `}</style>
     </div>
   );
 }
