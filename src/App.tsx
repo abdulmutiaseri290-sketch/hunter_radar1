@@ -38,7 +38,7 @@ export default function App() {
       <main style={{ padding: '20px', textAlign: 'center' }}>
         {activeTab === 'radar' && (
           <div style={{ padding: '50px 0' }}>
-            <div style={{ width: '150px', height: '150px', border: '4px solid #FFD700', borderRadius: '50%', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center', animation: 'pulse 2s infinite' }}>
+            <div style={{ width: '150px', height: '150px', border: '4px solid #FFD700', borderRadius: '50%', margin: '0 auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <span style={{ fontSize: '4rem' }}>📡</span>
             </div>
             <h3 style={{ marginTop: '30px', color: '#FFD700' }}>الرادار متصل وجاهز</h3>
