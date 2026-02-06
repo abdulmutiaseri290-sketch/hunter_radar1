@@ -3,51 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>رادار 1 - نظام تتبع الصقور</title>
+    <title>رادار 1</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-        .container { width: 90%; max-width: 400px; text-align: center; border: 1px solid #FFD700; padding: 30px; border-radius: 20px; background: #111; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
-        .gold { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-        input { width: 85%; padding: 15px; margin: 20px 0; border-radius: 12px; border: 2px solid #FFD700; background: #222; color: #fff; font-size: 1.8rem; text-align: center; outline: none; }
-        button { width: 95%; padding: 15px; background: #FFD700; color: #000; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.3rem; transition: 0.3s; }
-        button:active { transform: scale(0.95); background: #e6c200; }
-        .radar { width: 220px; height: 220px; border: 2px solid #004400; border-radius: 50%; margin: 30px auto; position: relative; background: radial-gradient(circle, #001a00, #000); overflow: hidden; display: none; }
-        .scan { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; background: linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.3) 100%); transform-origin: top left; animation: scan 4s linear infinite; }
-        .point { position: absolute; width: 10px; height: 10px; background: #FFD700; border-radius: 50%; top: 30%; left: 60%; box-shadow: 0 0 10px #FFD700; }
+        body { background: #000; color: #fff; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { text-align: center; border: 1px solid #FFD700; padding: 40px; border-radius: 30px; background: #111; width: 320px; }
+        .gold { color: #FFD700; }
+        input { width: 90%; padding: 15px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #FFD700; background: #222; color: #fff; font-size: 1.5rem; text-align: center; }
+        button { width: 100%; padding: 15px; background: #FFD700; color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
+        .radar { width: 200px; height: 200px; border: 2px solid #004400; border-radius: 50%; margin: 20px auto; position: relative; background: radial-gradient(circle, #001a00, #000); overflow: hidden; display: none; }
+        .scan { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; background: linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.2) 100%); transform-origin: top left; animation: scan 4s linear infinite; }
         @keyframes scan { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .hidden { display: none; }
     </style>
 </head>
 <body>
-
-    <div class="container" id="loginBox">
-        <h1 style="font-size: 5rem; margin: 0;">🦅</h1>
+    <div class="container" id="login">
         <h1 class="gold">رادار 1</h1>
-        <p style="color: #888;">نظام تتبع الصقور المطور</p>
-        <input type="password" id="pin" placeholder="****">
-        <button onclick="checkPin()">دخول للنظام</button>
+        <input type="password" id="pass" placeholder="الرمز السري">
+        <button onclick="enter()">دخول</button>
     </div>
-
-    <div class="container hidden" id="radarBox">
-        <h2 class="gold">نظام التتبع النشط 📡</h2>
-        <div class="radar" id="radarCircle" style="display: block;">
-            <div class="scan"></div>
-            <div class="point"></div>
-        </div>
-        <h3 style="color: #0f0; text-shadow: 0 0 5px #00ff00;">جاري المسح النشط...</h3>
-        <p style="color: #FFD700;">الموقع: صحراء المملكة العربية السعودية</p>
-        <button onclick="location.reload()" style="background: #222; color: #FFD700; margin-top: 20px; font-size: 0.9rem;">تسجيل خروج</button>
+    <div class="container hidden" id="radar-box">
+        <h2 class="gold">جاري التتبع...</h2>
+        <div class="radar" id="r-circ" style="display:block;"><div class="scan"></div></div>
+        <p>متصل بالأقمار الصناعية</p>
     </div>
-
     <script>
-        function checkPin() {
-            const input = document.getElementById('pin').value;
-            if (input === '663766') {
-                document.getElementById('loginBox').classList.add('hidden');
-                document.getElementById('radarBox').classList.remove('hidden');
-            } else {
-                alert('الرمز السري خطأ يا مدير عبدالمعطي!');
-            }
+        function enter() {
+            if(document.getElementById('pass').value === '663766') {
+                document.getElementById('login').classList.add('hidden');
+                document.getElementById('radar-box').classList.remove('hidden');
+            } else { alert('خطأ!'); }
         }
     </script>
 </body>
