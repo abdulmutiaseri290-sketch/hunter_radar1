@@ -1,11 +1,12 @@
 import { useState } from 'react';
 
+// نظام رادار الصياد المطور 2026 - نسخة عبدالمعطي
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pin, setPin] = useState('');
 
   const handleLogin = () => {
-    // الرمز السري الخاص بك
+    // الرمز السري المتفق عليه
     if (pin === '663766') {
       setIsLoggedIn(true);
     } else {
@@ -23,10 +24,11 @@ export default function App() {
       alignItems: 'center', 
       minHeight: '100vh', 
       margin: 0,
-      overflow: 'hidden'
+      overflow: 'hidden',
+      direction: 'rtl'
     }}>
       {!isLoggedIn ? (
-        /* --- شاشة الدخول --- */
+        /* --- شاشة الدخول الفخمة --- */
         <div style={{ 
           textAlign: 'center', 
           border: '1px solid #FFD700', 
@@ -34,14 +36,15 @@ export default function App() {
           borderRadius: '30px', 
           background: '#111', 
           width: '320px',
-          boxShadow: '0 0 20px rgba(255, 215, 0, 0.1)'
+          boxShadow: '0 0 30px rgba(255, 215, 0, 0.15)'
         }}>
-          <h1 style={{ color: '#FFD700', fontSize: '2.5rem', marginBottom: '10px' }}>🦅 رادار 1</h1>
-          <p style={{ color: '#666', marginBottom: '30px' }}>نظام تتبع الصقور المطور</p>
+          <div style={{ fontSize: '5rem', marginBottom: '10px' }}>🦅</div>
+          <h1 style={{ color: '#FFD700', fontSize: '2.5rem', margin: '0 0 10px 0' }}>رادار 1</h1>
+          <p style={{ color: '#666', marginBottom: '30px', fontSize: '0.9rem' }}>نظام تتبع الصقور المطور</p>
           
           <input 
             type="password" 
-            placeholder="الرمز السري"
+            placeholder="أدخل الرمز السري"
             value={pin}
             onChange={(e) => setPin(e.target.value)}
             style={{ 
@@ -68,14 +71,15 @@ export default function App() {
               borderRadius: '12px', 
               fontWeight: 'bold', 
               cursor: 'pointer', 
-              fontSize: '1.2rem' 
+              fontSize: '1.2rem',
+              transition: '0.3s'
             }}
           >
             دخول للنظام
           </button>
         </div>
       ) : (
-        /* --- شاشة الرادار بعد الدخول --- */
+        /* --- واجهة الرادار النشط --- */
         <div style={{ 
           textAlign: 'center', 
           border: '1px solid #FFD700', 
@@ -84,7 +88,7 @@ export default function App() {
           background: '#111', 
           width: '320px' 
         }}>
-          <h2 style={{ color: '#FFD700', marginBottom: '20px' }}>جاري التتبع النشط...</h2>
+          <h2 style={{ color: '#FFD700', marginBottom: '20px' }}>نظام التتبع النشط 📡</h2>
           
           <div style={{ 
             width: '220px', 
@@ -95,35 +99,38 @@ export default function App() {
             position: 'relative', 
             background: 'radial-gradient(circle, #001a00, #000)', 
             overflow: 'hidden',
-            boxShadow: '0 0 15px #004400'
+            boxShadow: '0 0 20px #004400'
           }}>
-            {/* خط المسح المتحرك */}
+            {/* الأنيميشن الخاص بمسح الرادار */}
             <div style={{ 
               position: 'absolute', 
               top: '50%', 
               left: '50%', 
               width: '100%', 
               height: '100%', 
-              background: 'linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.2) 100%)', 
+              background: 'linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.3) 100%)', 
               transformOrigin: 'top left', 
               animation: 'scan 4s linear infinite' 
             }}></div>
             
-            {/* نقطة الهدف (الصقر) */}
+            {/* نقطة الصقر المكتشف */}
             <div style={{
               position: 'absolute',
-              top: '30%',
-              left: '60%',
+              top: '35%',
+              left: '65%',
               width: '10px',
               height: '10px',
               backgroundColor: '#FFD700',
               borderRadius: '50%',
-              boxShadow: '0 0 10px #FFD700'
+              boxShadow: '0 0 15px #FFD700',
+              animation: 'pulse 1.5s infinite'
             }}></div>
           </div>
           
-          <p style={{ color: '#00ff00', fontWeight: 'bold' }}>متصل بالأقمار الصناعية 📡</p>
-          <p style={{ color: '#888', fontSize: '0.9rem' }}>الموقع: المملكة العربية السعودية</p>
+          <div style={{ marginTop: '20px' }}>
+            <p style={{ color: '#00ff00', fontWeight: 'bold', margin: '5px 0' }}>حالة الإشارة: قوية</p>
+            <p style={{ color: '#888', fontSize: '0.8rem', margin: '5px 0' }}>الموقع: المملكة العربية السعودية</p>
+          </div>
           
           <button 
             onClick={() => setIsLoggedIn(false)}
@@ -132,7 +139,7 @@ export default function App() {
               background: 'none', 
               color: '#FFD700', 
               border: '1px solid #FFD700', 
-              padding: '8px 20px', 
+              padding: '8px 25px', 
               borderRadius: '8px', 
               cursor: 'pointer',
               fontSize: '0.9rem'
@@ -143,11 +150,16 @@ export default function App() {
         </div>
       )}
 
-      {/* الأنيميشن الخاص بالرادار */}
+      {/* تعريف حركات الأنيميشن */}
       <style>{`
         @keyframes scan {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.5); opacity: 0.5; }
+          100% { transform: scale(1); opacity: 1; }
         }
       `}</style>
     </div>
