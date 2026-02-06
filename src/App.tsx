@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-// نظام رادار الصياد المطور 2026 - نسخة عبدالمعطي
+// نظام رادار الصياد المطور 2026 - نسخة عبدالمعطي النهائية
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [pin, setPin] = useState('');
@@ -113,7 +113,7 @@ export default function App() {
               animation: 'scan 4s linear infinite' 
             }}></div>
             
-            {/* نقطة الصقر المكتشف */}
+            {/* نقطة الصقر المكتشف (النبض) */}
             <div style={{
               position: 'absolute',
               top: '35%',
@@ -150,7 +150,7 @@ export default function App() {
         </div>
       )}
 
-      {/* تعريف حركات الأنيميشن */}
+      {/* تعريف حركات الأنيميشن (CSS) */}
       <style>{`
         @keyframes scan {
           from { transform: rotate(0deg); }
