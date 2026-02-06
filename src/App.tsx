@@ -63,7 +63,7 @@ export default function App() {
           
           <button 
             onClick={() => alert('🚨 تم إرسال نداء الفزعة وموقعك لجميع الصقارين!')}
-            style={{ background: '#ff0000', color: '#fff', padding: '20px', borderRadius: '20px', border: 'none', width: '90%', fontWeight: 'bold', fontSize: '1.8rem', animation: 'blink 1s infinite', cursor: 'pointer', boxShadow: '0 0 25px rgba(255,0,0,0.6)' }}
+            style={{ background: '#ff0000', color: '#fff', padding: '20px', borderRadius: '20px', border: 'none', width: '90%', fontWeight: 'bold', fontSize: '1.8rem', cursor: 'pointer', boxShadow: '0 0 25px rgba(255,0,0,0.6)', animation: 'blink 1s infinite' }}
           >🚨 فزعة!</button>
         </div>
       )}
@@ -87,16 +87,16 @@ export default function App() {
               placeholder="اكتب رسالتك هنا..." 
               style={{ flex: 1, padding: '15px', borderRadius: '12px', border: '1px solid #FFD700', background: '#000', color: '#fff', outline: 'none' }}
             />
-            <button onClick={sendMessage} style={{ background: '#FFD700', color: '#000', padding: '0 25px', borderRadius: '12px', border: 'none', fontWeight: 'bold', cursor: 'pointer', fontSize: '1rem' }}>إرسال</button>
+            <button onClick={sendMessage} style={{ background: '#FFD700', color: '#000', padding: '0 25px', borderRadius: '12px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>إرسال</button>
           </div>
         </div>
       )}
 
-      {/* القائمة السفلية (Navigation) */}
+      {/* القائمة السفلية */}
       <nav style={{ position: 'fixed', bottom: 0, width: '100%', background: '#111', display: 'flex', justifyContent: 'space-around', padding: '20px 0', borderTop: '2px solid #FFD700', zIndex: 1000 }}>
-        <div onClick={() => setActiveTab('radar')} style={{ color: activeTab === 'radar' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.2rem' }}>📡 الرادار</div>
-        <div onClick={() => setActiveTab('chat')} style={{ color: activeTab === 'chat' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.2rem' }}>💬 الدردشة</div>
-        <div onClick={() => window.location.reload()} style={{ color: '#888', cursor: 'pointer', fontSize: '1.2rem' }}>🔒 خروج</div>
+        <div onClick={() => setActiveTab('radar')} style={{ color: activeTab === 'radar' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem' }}>📡 الرادار</div>
+        <div onClick={() => setActiveTab('chat')} style={{ color: activeTab === 'chat' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold', fontSize: '1.1rem' }}>💬 الدردشة</div>
+        <div onClick={() => window.location.reload()} style={{ color: '#888', cursor: 'pointer', fontSize: '1.1rem' }}>🔒 خروج</div>
       </nav>
 
       <style>{`
