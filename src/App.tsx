@@ -1,127 +1,105 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة رادار 1 - النسخة المتكاملة</title>
-    <style>
-        /* التنسيق العام */
-        body { background: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding-bottom: 70px; direction: rtl; }
-        .container { padding: 20px; text-align: center; max-width: 500px; margin: auto; }
-        .gold { color: #FFD700; }
-        .hidden { display: none; }
+import { useState, useEffect } from 'react';
 
-        /* شاشة الدخول */
-        .login-box { border: 1px solid #FFD700; padding: 40px; border-radius: 30px; background: #111; margin-top: 50px; box-shadow: 0 0 30px rgba(255, 215, 0, 0.2); }
-        input[type="password"] { width: 80%; padding: 15px; margin: 20px 0; border-radius: 12px; border: 2px solid #FFD700; background: #222; color: #fff; font-size: 1.5rem; text-align: center; outline: none; }
-        .btn-main { width: 100%; padding: 15px; background: #FFD700; color: #000; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.2rem; }
+// نظام رادار 1 - النسخة المتكاملة (عبدالمعطي 2026)
+export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [pin, setPin] = useState('');
+  const [activeTab, setActiveTab] = useState('radar');
+  const [messages, setMessages] = useState([
+    { user: 'مدير عبدالمعطي', text: 'الرادار شغال يا شباب! 🦅' },
+    { user: 'النظام', text: 'تم تحديث الموقع بنجاح.' }
+  ]);
+  const [newMsg, setNewMsg] = useState('');
 
-        /* الرادار */
-        .radar-box { width: 250px; height: 250px; border: 2px solid #004400; border-radius: 50%; margin: 30px auto; position: relative; background: radial-gradient(circle, #001a00, #000); overflow: hidden; box-shadow: 0 0 20px #004400; }
-        .scan { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; background: linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.3) 100%); transform-origin: top left; animation: scan 4s linear infinite; }
-        .point { position: absolute; width: 10px; height: 10px; background: #FFD700; border-radius: 50%; top: 35%; left: 65%; box-shadow: 0 0 15px #FFD700; animation: pulse 1.5s infinite; }
+  const handleLogin = () => {
+    if (pin === '663766') {
+      setIsLoggedIn(true);
+    } else {
+      alert('الرمز السري غير صحيح يا مدير!');
+    }
+  };
+
+  const sendMsg = () => {
+    if (newMsg.trim()) {
+      setMessages([...messages, { user: 'أنت', text: newMsg }]);
+      setNewMsg('');
+    }
+  };
+
+  if (!isLoggedIn) {
+    return (
+      <div style={{ backgroundColor: '#000', color: '#fff', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'sans-serif', direction: 'rtl' }}>
+        <div style={{ textAlign: 'center', border: '1px solid #FFD700', padding: '40px', borderRadius: '30px', background: '#111', width: '300px', boxShadow: '0 0 30px rgba(255, 215, 0, 0.2)' }}>
+          <div style={{ fontSize: '4rem' }}>🦅</div>
+          <h1 style={{ color: '#FFD700' }}>رادار 1</h1>
+          <input 
+            type="password" 
+            placeholder="الرمز السري" 
+            value={pin}
+            onChange={(e) => setPin(e.target.value)}
+            style={{ width: '90%', padding: '12px', margin: '20px 0', borderRadius: '10px', border: '2px solid #FFD700', background: '#222', color: '#fff', textAlign: 'center', fontSize: '1.2rem' }}
+          />
+          <button onClick={handleLogin} style={{ width: '100%', padding: '12px', backgroundColor: '#FFD700', color: '#000', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer' }}>دخول للنظام</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ backgroundColor: '#000', color: '#fff', minHeight: '100vh', fontFamily: 'sans-serif', direction: 'rtl', paddingBottom: '80px' }}>
+      
+      {/* صفحة الرادار */}
+      {activeTab === 'radar' && (
+        <div style={{ textAlign: 'center', padding: '20px' }}>
+          <h2 style={{ color: '#FFD700' }}>نظام التتبع النشط 📡</h2>
+          <div style={{ width: '250px', height: '250px', border: '2px solid #004400', borderRadius: '50%', margin: '30px auto', position: 'relative', background: 'radial-gradient(circle, #001a00, #000)', overflow: 'hidden', boxShadow: '0 0 20px #004400' }}>
+            <div style={{ position: 'absolute', top: '50%', left: '50%', width: '100%', height: '100%', background: 'linear-gradient(45deg, transparent 50%, rgba(0, 255, 0, 0.3) 100%)', transformOrigin: 'top left', animation: 'scan 4s linear infinite' }}></div>
+            <div style={{ position: 'absolute', width: '10px', height: '10px', backgroundColor: '#FFD700', borderRadius: '50%', top: '35%', left: '65%', boxShadow: '0 0 15px #FFD700', animation: 'pulse 1.5s infinite' }}></div>
+          </div>
+          <p style={{ color: '#0f0' }}>متصل بالأقمار الصناعية</p>
+          <button 
+            onClick={() => alert('🚨 تم إرسال نداء الفزعة لجميع الصقارين!')}
+            style={{ background: 'red', color: '#fff', padding: '20px', borderRadius: '15px', border: 'none', width: '90%', fontWeight: 'bold', fontSize: '1.5rem', animation: 'blink 1s infinite', cursor: 'pointer' }}
+          >🚨 فزعة!</button>
+        </div>
+      )}
+
+      {/* صفحة الدردشة */}
+      {activeTab === 'chat' && (
+        <div style={{ padding: '20px' }}>
+          <h2 style={{ color: '#FFD700', textAlign: 'center' }}>دردشة المقناص 💬</h2>
+          <div style={{ background: '#111', height: '350px', borderRadius: '15px', padding: '15px', overflowY: 'auto', marginBottom: '15px', border: '1px solid #333' }}>
+            {messages.map((m, i) => (
+              <div key={i} style={{ background: '#222', padding: '10px', borderRadius: '10px', marginBottom: '10px', borderRight: '4px solid #FFD700' }}>
+                <b>{m.user}:</b> {m.text}
+              </div>
+            ))}
+          </div>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <input 
+              type="text" 
+              value={newMsg}
+              onChange={(e) => setNewMsg(e.target.value)}
+              placeholder="اكتب رسالتك..." 
+              style={{ flex: 1, padding: '12px', borderRadius: '10px', border: '1px solid #FFD700', background: '#000', color: '#fff' }}
+            />
+            <button onClick={sendMsg} style={{ background: '#FFD700', padding: '0 20px', borderRadius: '10px', border: 'none', fontWeight: 'bold' }}>إرسال</button>
+          </div>
+        </div>
+      )}
+
+      {/* المنيو السفلي */}
+      <nav style={{ position: 'fixed', bottom: 0, width: '100%', background: '#111', display: 'flex', justifyContent: 'space-around', padding: '15px 0', borderTop: '2px solid #FFD700' }}>
+        <div onClick={() => setActiveTab('radar')} style={{ color: activeTab === 'radar' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold' }}>📡 الرادار</div>
+        <div onClick={() => setActiveTab('chat')} style={{ color: activeTab === 'chat' ? '#FFD700' : '#888', cursor: 'pointer', fontWeight: 'bold' }}>💬 الدردشة</div>
+        <div onClick={() => window.location.reload()} style={{ color: '#888', cursor: 'pointer' }}>🔒 خروج</div>
+      </nav>
+
+      <style>{`
         @keyframes scan { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } }
-
-        /* الدردشة */
-        .chat-area { background: #111; border: 1px solid #333; height: 350px; border-radius: 15px; margin: 20px 0; padding: 15px; overflow-y: auto; text-align: right; }
-        .msg { background: #222; padding: 10px; border-radius: 10px; margin-bottom: 10px; border-right: 4px solid #FFD700; }
-        .chat-input-row { display: flex; gap: 10px; }
-        input[type="text"] { flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #FFD700; background: #000; color: #fff; }
-
-        /* الفزعة */
-        .fazaa-btn { background: #ff0000; color: #fff; padding: 20px; border-radius: 15px; border: none; width: 100%; font-weight: bold; font-size: 1.5rem; margin-top: 20px; cursor: pointer; animation: blink 1s infinite; box-shadow: 0 0 20px rgba(255,0,0,0.4); }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-
-        /* المنيو السفلي */
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #111; display: flex; justify-content: space-around; padding: 15px 0; border-top: 2px solid #FFD700; z-index: 100; }
-        .nav-item { color: #888; text-decoration: none; font-size: 0.9rem; cursor: pointer; font-weight: bold; }
-        .nav-item.active { color: #FFD700; }
-    </style>
-</head>
-<body>
-
-    <div class="container" id="loginPage">
-        <div class="login-box">
-            <div style="font-size: 5rem;">🦅</div>
-            <h1 class="gold">رادار 1</h1>
-            <p style="color: #666;">أدخل الرمز السري للدخول</p>
-            <input type="password" id="pinCode" placeholder="****">
-            <button class="btn-main" onclick="login()">دخول للنظام</button>
-        </div>
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
+      `}</style>
     </div>
-
-    <div class="container hidden" id="radarPage">
-        <h2 class="gold">نظام التتبع النشط</h2>
-        <div class="radar-box">
-            <div class="scan"></div>
-            <div class="point"></div>
-        </div>
-        <p style="color: #0f0;">متصل بالأقمار الصناعية 📡</p>
-        <p style="color: #888;">الموقع الحالي: صحراء المملكة</p>
-        <button class="fazaa-btn" onclick="sendFazaa()">🚨 إرسال فزعة</button>
-    </div>
-
-    <div class="container hidden" id="chatPage">
-        <h2 class="gold">دردشة المقناص</h2>
-        <div class="chat-area" id="chatBox">
-            <div class="msg"><b>مدير عبدالمعطي:</b> السلام عليكم، الرادار شغال تمام.</div>
-            <div class="msg"><b>النظام:</b> أهلاً بك في غرف الدردشة.</div>
-        </div>
-        <div class="chat-input-row">
-            <input type="text" id="chatInput" placeholder="اكتب رسالتك...">
-            <button onclick="sendMessage()" style="background:#FFD700; border:none; border-radius:10px; padding:0 20px; font-weight:bold;">إرسال</button>
-        </div>
-    </div>
-
-    <nav class="nav-bar hidden" id="navBar">
-        <div class="nav-item active" onclick="switchPage('radarPage', this)">📡 الرادار</div>
-        <div class="nav-item" onclick="switchPage('chatPage', this)">💬 الدردشة</div>
-        <div class="nav-item" onclick="location.reload()">🔒 خروج</div>
-    </nav>
-
-    <script>
-        function login() {
-            const pin = document.getElementById('pinCode').value;
-            if (pin === '663766') {
-                document.getElementById('loginPage').classList.add('hidden');
-                document.getElementById('radarPage').classList.remove('hidden');
-                document.getElementById('navBar').classList.remove('hidden');
-            } else {
-                alert('الرمز السري خطأ!');
-            }
-        }
-
-        function switchPage(pageId, element) {
-            // إخفاء الصفحات
-            document.getElementById('radarPage').classList.add('hidden');
-            document.getElementById('chatPage').classList.add('hidden');
-            
-            // إظهار الصفحة المطلوبة
-            document.getElementById(pageId).classList.remove('hidden');
-            
-            // تحديث شكل المنيو
-            const items = document.querySelectorAll('.nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const chatBox = document.getElementById('chatBox');
-            if (input.value.trim() !== "") {
-                const div = document.createElement('div');
-                div.className = 'msg';
-                div.innerHTML = `<b>أنت:</b> ${input.value}`;
-                chatBox.appendChild(div);
-                input.value = "";
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
-        }
-
-        function sendFazaa() {
-            alert('🚨 تم إرسال نداء الفزعة لجميع الصقارين القريبين منك!');
-        }
-    </script>
-</body>
-</html>
+  );
+}
